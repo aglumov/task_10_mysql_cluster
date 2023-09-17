@@ -16,7 +16,7 @@ yc_cloud_id  = id облака
 yc_folder_id = id каталога
 ```
 - инициализировать терраформ: ```terraform init```
-- запустить создание инфраструктуры: ```terraform apply```
+- запустить создание инфраструктуры: ```terraform apply -var-file common.tfvars```
 - после создания инфраструктуры дождаться загрузки ВМ
 - перейти в каталог ```ansible``` и запустить плейбук: ```ansible-playbook setup.yaml```
 - при успешном выполнении плейбука в выводе terraform взять ip-адрес из ```nginx_public_ip_address``` и подключиться по http.

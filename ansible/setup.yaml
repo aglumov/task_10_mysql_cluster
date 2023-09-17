@@ -11,6 +11,7 @@
     - curl
     - xz-utils
     - python3-pip
+    - percona-xtradb-cluster
     lb_packages:
     - nginx
     app_packages:

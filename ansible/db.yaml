@@ -3,6 +3,15 @@
     name: "{{ inventory_hostname }}"
     use: "systemd"
 
+- name: Install Percona Repo Package
+  ansible.builtin.apt:
+    deb: "https://repo.percona.com/apt/percona-release_latest.generic_all.deb"
+
+- name: Enable Percona Repositories
+  ansible.builtin.shell: |
+    percona-release enable-only pxc-80 release
+    percona-release enable tools release
+
 - name: Install prerequisites
   ansible.builtin.apt:
     name: "{{ db_packages }}"
@@ -14,19 +23,10 @@
     name: pymysql
     state: latest
 
-- name: Install Percona Repo Package
-  ansible.builtin.apt:
-    deb: "https://repo.percona.com/apt/percona-release_latest.generic_all.deb"
-
-- name: Enable Percona Repositories
-  ansible.builtin.shell: |
-    percona-release enable-only pxc-80 release
-    percona-release enable tools release
-
-- name: Install XtraDB Package
-  ansible.builtin.apt:
-    name: "percona-xtradb-cluster"
-    update_cache: true
+#- name: Install XtraDB Package
+#  ansible.builtin.apt:
+#    name: "percona-xtradb-cluster"
+#    update_cache: true
 
 - name: Configure Percona Cluster Config
   ansible.builtin.template:
